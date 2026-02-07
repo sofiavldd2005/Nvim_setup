@@ -4,5 +4,11 @@ doc/tags
 debug
 .repro
 foo.*
-*.log
 data
+
+#shit to ignore
+.lazy.lua
+lazy-lock.json
+/plugin/
+/lua/config/local.lua
+*.log
