@@ -5,6 +5,13 @@ return {
       -- This ensures that every time you open a directory,
       -- the tree is there.
       follow_current_file = { enabled = true },
+      -- this to ensure hidden files are showed in the neo-tree
+      filtered_items = {
+        visible = true, -- This makes hidden files visible but usualy hidden
+        hide_dotfiles = false,
+        hide_gitignored = false,
+        hide_hidden = false,
+      },
     },
     -- This forces the window to stay open
     window = {
