@@ -1,44 +1,54 @@
 # 💤 LazyVim
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+My Personal Neovim configs built on top of [LazyVim](https://github.com/LazyVim/LazyVim)
 
-My Neovim Configuration (LazyVim) :)
-This is my personal Neovim setup, i usually work with C, Rust, and LaTeX development, so i started optimizing for it.
+The features i found importante
 
-System Dependencies
-Before cloning, ensure you have the following installed on your system ( I use Ubuntu :):
+**Rust** Full `rust-analyzer` integration with automatic formatting via `rustfmt`
 
-Compilers/LSPs: build-essential (C), rustup (Rust), and texlive-full (LaTeX).
+**C** I have the `clangd` and `clang-format` plugins
 
-PDF Viewer: zathura (for live LaTeX previewing).
+**Latex** Live preview with `VimTeX` and `Zathura`
 
-Tools: fd-find, ripgrep (for fast searching), and latexmk.
+**neotree** Pretty sidebar tree for file management with hiden files shown
 
-Installation
-Back up your existing config: (Skip this one if you're felling brave)
+## How you can use my setup :)
 
-Bash
-
+1. Backup your existing config (skip this one if you're feeling brave)
+```Bash
 mv ~/.config/nvim ~/.config/nvim.bak
-Clone this repository:
+```
+2. Clone the repo
 
-Bash
+```Bash
+git clone [https://github.com/sofiavldd2005/Nvim_setup.git](https://github.com/sofiavldd2005/Nvim_setup.git) ~/.config/nvim
+```
+3. Lastly launch Neovim
 
-git clone https://github.com/sofiavldd2005/Nvim_setup.git ~/.config/nvim
-Launch Neovim:
-
-Bash
-
+```Bash
 nvim
-Lazy.nvim will automatically download and install all plugins and LSPs on the first run.
+```
 
-Key Highlights, i have found useful.
-Sidebar: <leader>e to toggle Neo-tree. ("u" -> up one directory, "." -> down one directory)
-<leader>j + t to open a terminal on the bottom.
 
-LaTeX Preview: \ll to start live compilation and open Zathura.
+## Config details
 
-Find Files: <leader><space> to search everything.
+**Formaters** Managed by `conform.nvim`
 
-Terminal: Ctrl-/ to toggle the floating terminal.
+**neotree** The config is inside the `neotree.lua` file
+
+**Package manager** use :Lazy to manage updates
+
+**LSP Manager** use :Mason to install new language servers and debuggers
+
+## Usefull shortcuts because nvim is full of confusing shortcuts
+
+1. New terminal at the botton : `<leader>ft`
+2. Switch between neotree and files : `Ctrl h ` and `Ctrl l`
+3. Go up\down one level in directoriews : `u`\ `.`
+4. Have two terminals, split horizontal : `Esc ` and then `:vsplit | terminal`
+5. To start live compilation and open Zathura : `\ll` 
+
+
+
+
+
