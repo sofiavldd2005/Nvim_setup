@@ -9,6 +9,7 @@ return {
       c = { "clang-format" },
       cpp = { "clang-format" },
       sh = { "shfmt" }, -- This will format your .sh scripts
+      yaml = { "yamlfmt" },
     },
     -- This ensures it tries the tool first, then the LSP as a backup
     default_format_opts = {
