@@ -7,23 +7,23 @@ end, { desc = "Terminal (Horizontal)" }) -- Keymaps are automatically loaded on 
 -- Debugging (DAP) Keymaps
 -- ==========================================
 
--- F5: Start or Continue execution
-vim.keymap.set("n", "<F5>", function()
+-- F8: Start or Continue execution
+vim.keymap.set("n", "<F8>", function()
   require("dap").continue()
 end, { desc = "DAP: Continue" })
 
--- F10: Step Over (Execute current line, don't go into functions)
-vim.keymap.set("n", "<F10>", function()
+-- F6: Step Over (Execute current line, don't go into functions)
+vim.keymap.set("n", "<F6>", function()
   require("dap").step_over()
 end, { desc = "DAP: Step Over" })
 
--- F11: Step Into (Go inside the function call on the current line)
-vim.keymap.set("n", "<F11>", function()
+-- F5: Step Into (Go inside the function call on the current line)
+vim.keymap.set("n", "<F5>", function()
   require("dap").step_into()
 end, { desc = "DAP: Step Into" })
 
--- F12: Step Out (Finish the current function and jump back out)
-vim.keymap.set("n", "<F12>", function()
+-- F7: Step Out (Finish the current function and jump back out)
+vim.keymap.set("n", "<F7>", function()
   require("dap").step_out()
 end, { desc = "DAP: Step Out" })
 
@@ -37,7 +37,7 @@ vim.keymap.set("n", "<leader>dr", function()
   require("dap").repl.toggle()
 end, { desc = "DAP: Toggle REPL" })
 
--- Shift+F5: Terminate the session and close the UI
+-- <leader>dq Terminate the session and close the UI
 vim.keymap.set("n", "<leader>dq", function()
   -- 1. Stop the debugger
   require("dap").terminate()
