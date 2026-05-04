@@ -36,7 +36,7 @@ table.insert(dap.configurations.rust, {
   type = "probe-rs-debug",
   request = "launch",
   cwd = "${workspaceFolder}",
-  chip = "STM32F413ZHT", -- Double check this is your exact chip!
+  chip = "STM32F446RC", -- Double check this is your exact chip!
   flashingConfig = {
     flashingEnabled = true,
     resetAfterFlashing = true,
@@ -50,3 +50,10 @@ table.insert(dap.configurations.rust, {
     },
   },
 })
+
+vim.opt.termguicolors = true
+
+-- LaTeX configuration for VimTeX : MACOs
+vim.g.vimtex_view_method = "skim"
+vim.g.vimtex_view_skim_activate = 1
+vim.g.vimtex_view_skim_sync = 1
