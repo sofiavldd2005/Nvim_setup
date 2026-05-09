@@ -1,4 +1,4 @@
-# 💤 LazyVim Enhanced Configuration
+# My personal Neovim Configs
 
 <div align="center">
 
@@ -6,7 +6,7 @@
 ![Neovim](https://img.shields.io/badge/Neovim-57A143?style=for-the-badge&logo=neovim&logoColor=white)
 ![LazyVim](https://img.shields.io/badge/LazyVim-9F7AEA?style=for-the-badge&logo=neovim&logoColor=white)
 
-A powerful and opinionated Neovim configuration built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with enhanced support for modern development workflows, embedded systems, and academic work.
+Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for modern development workflows, embedded systems, and academic work.
 
 [Features](#-features) • [Installation](#-installation) • [Configuration](#-configuration) • [Keybindings](#-keybindings) • [Languages](#-supported-languages)
 
@@ -16,8 +16,8 @@ A powerful and opinionated Neovim configuration built on top of [LazyVim](https:
 
 ## ✨ Features
 
-### 🦀 **Rust Development** (Advanced)
-- **Full `rust-analyzer` integration** with intelligent code completion and refactoring
+### 🦀 **Rust Development** 
+- **Full `rust-analyzer` integration** with code completion and refactoring
 - **Automatic formatting** via `rustfmt` with custom style configurations
 - **Embedded Systems Debugging** with `probe-rs` support for embedded ARM development
   - Pre-configured Embassy debugging for STM32F446RC microcontroller
@@ -25,7 +25,7 @@ A powerful and opinionated Neovim configuration built on top of [LazyVim](https:
   - Integrated DAP (Debug Adapter Protocol) for seamless breakpoint debugging
 
 ### 🔧 **C/C++ Development**
-- **`clangd` language server** for intelligent code analysis and completion
+- **`clangd` language server** for  code analysis and completion
 - **Automatic code formatting** via `clang-format`
 - **CMake integration** with one-key CMake project generation (`<leader>cg`)
 - **Automatic compile_commands.json linking** for seamless clangd integration
