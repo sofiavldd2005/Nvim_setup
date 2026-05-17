@@ -52,3 +52,4 @@ require("lazy").setup({
     },
   },
 })
+vim.g.colors_name = "catppuccin"

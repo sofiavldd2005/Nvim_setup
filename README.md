@@ -24,11 +24,16 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
   - One-command flashing and debugging workflow
   - Integrated DAP (Debug Adapter Protocol) for seamless breakpoint debugging
 
-### 🔧 **C/C++ Development**
-- **`clangd` language server** for  code analysis and completion
+### 🔧 **C/C++ & C# Development**
+- **`clangd` language server** for high-fidelity code analysis and completions
 - **Automatic code formatting** via `clang-format`
 - **CMake integration** with one-key CMake project generation (`<leader>cg`)
-- **Automatic compile_commands.json linking** for seamless clangd integration
+- **Automatic compile_commands.json linking** for immediate clangd compiler awareness
+- **Advanced Embedded Systems Debugging** via Microsoft `cpptools` (cppdbg) and OpenOCD SWD:
+  - Connects seamlessly to a background OpenOCD session (`localhost:3333`)
+  - Uses the official, stable STMicroelectronics-customized `arm-none-eabi-gdb` toolchain binary
+  - Automatic memory flashing (`load`) and CPU execution control (`monitor reset halt`) on startup
+  - Real-time live-updating **Disassembly View** buffer next to your source code
 
 ### 📐 **LaTeX & Academic Writing**
 - **Live PDF preview** with `VimTeX` and `Zathura`
@@ -167,6 +172,8 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 | `F9` | Toggle breakpoint on current line |
 | `<leader>dr` | Open debug REPL console |
 | `<leader>dq` | Terminate debug session |
+| `:DapDisasm` | Toggle real-time live-updating Disassembly View buffer |
+| `-exec <cmd>` | Execute raw GDB commands in the DAP REPL (e.g. `-exec info registers`) |
 
 ### Additional Tricks
 
@@ -207,6 +214,7 @@ Search for your language and press `i` to install.
 | **lazy.nvim** | Plugin manager | Core |
 | **neo-tree.nvim** | File explorer sidebar | Custom |
 | **nvim-dap** | Debug Adapter Protocol | Enhanced |
+| **nvim-dap-disasm** | Real-time Disassembly Viewer | Custom |
 | **nvim-lspconfig** | LSP configuration | Included |
 | **conform.nvim** | Code formatter | Included |
 | **blink.cmp** | Smart completion | Enhanced |
@@ -217,16 +225,26 @@ For a complete plugin list, run `:Lazy` in Neovim.
 
 ---
 
-## 🚀 Advanced Usage
+### Embedded C/C++ Debugging (STM32 + OpenOCD)
+The configuration includes a professional C/C++ embedded debugger which flashes and debugs STM32 targets:
 
-### Embedded Rust Debugging
-The configuration includes a ready-to-use Embassy debugging setup for STM32F446RC:
+1. **Start OpenOCD** in a terminal split:
+   ```bash
+   openocd -f interface/stlink.cfg -f target/stm32f4x.cfg
+   ```
+2. **Launch Neovim**, toggle a breakpoint, and start debugging (`F5` or `<leader>dc`).
+3. Select **`Debug STM32 (OpenOCD SWD)`**. Neovim will connect to OpenOCD, flash the microcontroller, and halt at `main`.
+4. Run **`:DapDisasm`** to open the real-time disassembly buffer alongside your code. It will update automatically as you step through the program!
 
-```lua
--- In init.lua, modify the `chip` and `programBinary` fields to match your setup:
-chip = "STM32F446RC",  -- Your microcontroller chip
-programBinary = "${workspaceFolder}/target/thumbv7em-none-eabihf/debug/your_binary_name",
-```
+### Embedded Rust Debugging (probe-rs)
+A ready-to-use Embassy debugging setup is included for STM32F446RC:
+
+1. In `/home/sofia/.config/nvim/lua/plugins/dap.lua`, verify your microchip and binary target:
+   ```lua
+   chip = "STM32F446RC",
+   programBinary = "${workspaceFolder}/target/thumbv7em-none-eabihf/debug/your_binary_name",
+   ```
+2. Press `F5` and select **`Embassy Debug (probe-rs)`**. Neovim will use `probe-rs` to flash and debug the chip in one step without needing OpenOCD in the background.
 
 ### CMake C/C++ Projects
 Generate CMake build files and configure clangd in one keystroke:
@@ -244,8 +262,6 @@ Write, compile, and preview LaTeX documents seamlessly:
 
 ---
 
-## 🛠️ Troubleshooting
-
 ### Plugins not installing?
 ```vim
 :Lazy sync
@@ -256,6 +272,17 @@ Write, compile, and preview LaTeX documents seamlessly:
 :Mason
 " Find and install the language server
 ```
+
+### Ubuntu GDB "Recursive internal problem" crash?
+Standard Ubuntu 24.04 GDB (`gdb-multiarch`) has an upstream bug where its native DAP server crashes over embedded target remote connections. 
+To bypass this, our configuration uses Microsoft's **`cppdbg`** translation adapter (connected to your Mason `OpenDebugAD7` binary) and redirects the debugger path to the highly stable, customized **`arm-none-eabi-gdb`** bundled with STM32Cube:
+```lua
+miDebuggerPath = "/home/sofia/.local/share/stm32cube/bundles/gnu-gdb-for-stm32/13.3.1+st.10/bin/arm-none-eabi-gdb"
+```
+
+### GDB "Interpreter 'dap' unrecognized" error?
+ST's customized `arm-none-eabi-gdb` does not have native Python/DAP interpreter support compiled in. 
+This is why we use the **`cppdbg`** adapter layout, which communicates over GDB's standard Machine Interface (MI) protocol and translates it into DAP commands for Neovim without needing `-i dap`.
 
 ### Debug adapter not found?
 Ensure `probe-rs` is installed in your Rust toolchain:

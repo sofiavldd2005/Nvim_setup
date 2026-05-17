@@ -15,41 +15,6 @@ end
 vim.keymap.set("n", "<leader>cg", cmake_generate, { desc = "CMake Generate Project" })
 vim.lsp.enable("gleam")
 
-local dap = require("dap")
-
--- 1. Define the adapter
-dap.adapters["probe-rs-debug"] = {
-  type = "server",
-  port = "${port}",
-  executable = {
-    command = vim.fn.expand("$HOME/.cargo/bin/probe-rs"),
-    args = { "dap-server", "--port", "${port}" },
-  },
-}
-
--- 2. Ensure the rust configuration table exists
-dap.configurations.rust = dap.configurations.rust or {}
-
--- 3. FORCE insert our custom config into the list
-table.insert(dap.configurations.rust, {
-  name = "Embassy Debug (probe-rs)",
-  type = "probe-rs-debug",
-  request = "launch",
-  cwd = "${workspaceFolder}",
-  chip = "STM32F446RC", -- Double check this is your exact chip!
-  flashingConfig = {
-    flashingEnabled = true,
-    resetAfterFlashing = true,
-    haltAfterReset = true,
-  },
-  coreConfigs = {
-    {
-      coreIndex = 0,
-      -- Make sure this binary name matches your Cargo.toml!
-      programBinary = "${workspaceFolder}/target/thumbv7em-none-eabihf/debug/r_d_inclita_sofware",
-    },
-  },
-})
 
 vim.opt.termguicolors = true
 
