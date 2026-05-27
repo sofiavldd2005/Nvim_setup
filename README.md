@@ -8,15 +8,15 @@
 
 Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for modern development workflows, embedded systems, and academic work.
 
-[Features](#-features) • [Installation](#-installation) • [Configuration](#-configuration) • [Keybindings](#-keybindings) • [Languages](#-supported-languages)
+[Features](#features) • [Installation](#installation) • [Configuration](#configuration) • [Keybindings](#keybindings) • [Languages](#supported-languages)
 
 </div>
 
 ---
 
-## ✨ Features
+## Features
 
-### 🦀 **Rust Development** 
+### **Rust Development**
 - **Full `rust-analyzer` integration** with code completion and refactoring
 - **Automatic formatting** via `rustfmt` with custom style configurations
 - **Embedded Systems Debugging** with `probe-rs` support for embedded ARM development
@@ -24,7 +24,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
   - One-command flashing and debugging workflow
   - Integrated DAP (Debug Adapter Protocol) for seamless breakpoint debugging
 
-### 🔧 **C/C++ & C# Development**
+### **C, C++ & C# Development**
 - **`clangd` language server** for high-fidelity code analysis and completions
 - **Automatic code formatting** via `clang-format`
 - **CMake integration** with one-key CMake project generation (`<leader>cg`)
@@ -35,25 +35,25 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
   - Automatic memory flashing (`load`) and CPU execution control (`monitor reset halt`) on startup
   - Real-time live-updating **Disassembly View** buffer next to your source code
 
-### 📐 **LaTeX & Academic Writing**
+### **LaTeX & Academic Writing**
 - **Live PDF preview** with `VimTeX` and `Zathura`
 - **Portuguese spell checking** built-in (`pt_PT`)
 - **Keyboard shortcut** for compilation and viewing (`\ll`)
 - **Perfect for research papers, theses, and technical documents**
 
-### 🎨 **File Management**
+### **File Management**
 - **Neo-tree sidebar** with visual file navigation
 - **Hidden files and directories visible by default** for full workspace control
 - **Smart directory navigation** with intuitive keybindings
 - **Auto-open Neo-tree** when launching Neovim without arguments
 
-### ✍️ **Advanced Code Editing**
-- **Multi-language syntax highlighting** (Python, TOML, Gleam, Bash, YAML, and more)
+### **Advanced Code Editing**
+- **Multi-language syntax highlighting** (Python, TOML, Haskell, Bash, YAML, and more)
 - **Context-aware autocompletion** via `blink.cmp` with super-tab preset
 - **Spell checking integration** with `codespell` for typo detection
 - **LSP-powered intellisense** across all supported languages
 
-### 🐛 **Debugging & Testing**
+### **Debugging & Testing**
 - **Debug Adapter Protocol (DAP)** with full visual debugging interface
 - **F-key shortcuts** for debugging control:
   - `F5`: Step Into
@@ -64,7 +64,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 - **Debug REPL** for runtime variable inspection (`<leader>dr`)
 - **Quick terminate** command (`<leader>dq`)
 
-### 🚀 **Performance Optimized**
+### **Performance Optimized**
 - **Lazy loading** of plugins for lightning-fast startup
 - **Automatic plugin updates** with change notifications
 - **Minimal default plugins** loaded (unnecessary vim builtins disabled)
@@ -72,13 +72,20 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### Prerequisites
 - Neovim >= 0.8
 - Git
 - `xclip` or similar clipboard manager (for system integration)
-- (Optional) `cmake`, `clang`, `rustup`, `texlive` for full feature support
+
+**Optional Prerequisites (for full feature support):**
+- `cmake` and `ninja-build` (for CMake integration)
+- `clang` and `clangd` (for C/C++ language support)
+- `rustup` (for Rust toolchain)
+- `texlive`, `zathura` or `skim` (for LaTeX compilation and preview)
+- `openocd` and `gdb-multiarch` (for C/C++ embedded debugging)
+- `probe-rs` (for Rust embedded debugging)
 
 ### Quick Start
 
@@ -104,7 +111,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Directory Structure
 ```
@@ -147,7 +154,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 
 ---
 
-## 🎮 Keybindings
+## Keybindings
 
 ### Essential Shortcuts
 
@@ -156,10 +163,18 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 | `<leader>ft` | Toggle terminal at bottom | Normal |
 | `<leader>/` | Toggle terminal (alternative) | Normal |
 | `Ctrl+h` | Focus left panel (Neo-tree) | Normal |
-| `Ctrl+l` | Focus right panel (file) | Normal |
+| `Ctrl+j` | Focus bottom panel | Normal |
+| `Ctrl+k` | Focus top panel | Normal |
+| `Ctrl+l` | Focus right panel | Normal |
 | `u` | Navigate up one directory | Neo-tree |
 | `.` | Set as root directory (zoom in) | Neo-tree |
-| `\ll` | Compile LaTeX & open in Zathura | Normal |
+| `\ll` | Compile LaTeX & open in previewer | Normal |
+| `<leader>cg` | Generate CMake project | Normal |
+| `<leader>cf` | Format current buffer | Normal |
+| `gd` | Go to definition | Normal |
+| `gr` | Go to references | Normal |
+| `K` | Hover documentation | Normal |
+| `<leader>ca` | Code actions | Normal |
 
 ### Debugging Keybindings (DAP)
 
@@ -185,16 +200,18 @@ See `lua/config/keymaps.lua` for all keybindings and customization options.
 
 ---
 
-## 🗣️ Supported Languages
+## Supported Languages
 
 ### Out-of-the-Box LSP Support
-- **Rust** (`rust-analyzer`) - Advanced with debugger
-- **C/C++** (`clangd`) - Advanced with formatter
-- **LaTeX** (`texlab`) - With live preview
-- **Lua** (`lua_ls`) - With vim global awareness
-- **Gleam** (`gleam`) - Functional programming
-- **Python** - Full intellisense
-- **YAML**, **TOML**, **Bash** - Syntax highlighting & linting
+The following languages are supported with native LSP integration, providing code completion, formatting, and diagnostics:
+- **Rust** (`rust-analyzer`) - Advanced code analysis, inlay hints, and debugging support.
+- **C/C++** (`clangd`) - High-fidelity completions, formatting (`clang-format`), and CMake integration.
+- **C#** (`omnisharp` / `csharp_ls`) - Core .NET support.
+- **LaTeX** (`texlab`) - Integrated with VimTeX for live previews and continuous compilation.
+- **Lua** (`lua_ls`) - Full Neovim API awareness for configuring your editor.
+- **Gleam** (`gleam`) - Functional programming support.
+- **Python** (`pyright` or `pylsp`) - Full intellisense and virtual environment detection.
+- **YAML** (`yamlls`), **TOML** (`taplo`), **Bash** (`bashls`), **JSON** (`jsonls`), **Markdown** (`marksman`) - Syntax highlighting, diagnostics, and formatting.
 
 ### Installing Additional Languages
 Use `:Mason` command in Neovim to install any additional language servers or debuggers:
@@ -206,7 +223,7 @@ Search for your language and press `i` to install.
 
 ---
 
-## 🔌 Key Plugins
+## Key Plugins
 
 | Plugin | Purpose | Status |
 |--------|---------|--------|
@@ -302,7 +319,7 @@ sudo apt install zathura zathura-pdf-poppler
 
 ---
 
-## 📝 Customization
+## Customization
 
 All configurations can be customized by editing files in `~/.config/nvim/`:
 - **Keybindings**: `lua/config/keymaps.lua`
@@ -312,19 +329,19 @@ All configurations can be customized by editing files in `~/.config/nvim/`:
 
 ---
 
-## 📄 License
+## License
 
 This configuration is licensed under the **Apache License 2.0**. See LICENSE file for details.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to fork, modify, and create pull requests! This is a personal configuration, but contributions and suggestions are welcome.
 
 ---
 
-## 🙋 Support
+## Support
 
 If you encounter issues:
 1. Check [LazyVim documentation](https://www.lazyvim.org/)
@@ -333,6 +350,12 @@ If you encounter issues:
 
 ---
 
-**Happy coding! 🚀**
+**Happy coding!**
 
-*Built with ❤️ for developers who love efficiency*
+*Built with love for developers who love efficiency*
+
+---
+
+## AI Disclaimer
+
+Please note that Artificial Intelligence (AI) tools were utilized to assist in the development of the documentation and the troubleshooting of various configurations within this repository.
