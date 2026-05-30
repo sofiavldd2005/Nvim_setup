@@ -13,6 +13,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 </div>
 
 ---
+These are my personal configs for neovim, I have built over the time, and are subject to change over the time. I also provide some troubleshooting advice, below, for some problemm I've enconuntered.
 
 ## Features
 
@@ -22,7 +23,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 - **Embedded Systems Debugging** with `probe-rs` support for embedded ARM development
   - Pre-configured Embassy debugging for STM32F446RC microcontroller
   - One-command flashing and debugging workflow
-  - Integrated DAP (Debug Adapter Protocol) for seamless breakpoint debugging
+  - Integrated DAP (Debug Adapter Protocol) for  breakpoint debugging
 
 ### **C, C++ & C# Development**
 - **`clangd` language server** for high-fidelity code analysis and completions
@@ -206,10 +207,10 @@ See `lua/config/keymaps.lua` for all keybindings and customization options.
 The following languages are supported with native LSP integration, providing code completion, formatting, and diagnostics:
 - **Rust** (`rust-analyzer`) - Advanced code analysis, inlay hints, and debugging support.
 - **C/C++** (`clangd`) - High-fidelity completions, formatting (`clang-format`), and CMake integration.
-- **C#** (`omnisharp` / `csharp_ls`) - Core .NET support.
 - **LaTeX** (`texlab`) - Integrated with VimTeX for live previews and continuous compilation.
 - **Lua** (`lua_ls`) - Full Neovim API awareness for configuring your editor.
-- **Gleam** (`gleam`) - Functional programming support.
+- **Haskell** (`hls`) -  Sintax highlighting and completion.
+- **Assembly** (`sumlari`) - Syntax highlighting and completion.
 - **Python** (`pyright` or `pylsp`) - Full intellisense and virtual environment detection.
 - **YAML** (`yamlls`), **TOML** (`taplo`), **Bash** (`bashls`), **JSON** (`jsonls`), **Markdown** (`marksman`) - Syntax highlighting, diagnostics, and formatting.
 

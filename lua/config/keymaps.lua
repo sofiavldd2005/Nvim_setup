@@ -50,3 +50,5 @@ vim.keymap.set("n", "<leader>dq", function()
 
   print("Debug session terminated.")
 end, { desc = "DAP: Terminate & Close UI" })
+
+
