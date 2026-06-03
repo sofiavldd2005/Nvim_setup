@@ -14,6 +14,7 @@ Built on top of [LazyVim](https://github.com/LazyVim/LazyVim) with support for m
 
 ---
 These are my personal configs for neovim, I have built over the time, and are subject to change over the time. I also provide some troubleshooting advice, below, for some problemm I've enconuntered.
+For the configs I use when using NixOS see the nixos_neovim_cfgs :) (I removed the auto-install bootstrap)
 
 ## Features
 
