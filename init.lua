@@ -15,10 +15,3 @@ end
 vim.keymap.set("n", "<leader>cg", cmake_generate, { desc = "CMake Generate Project" })
 vim.lsp.enable("gleam")
 
-
-vim.opt.termguicolors = true
-
--- LaTeX configuration for VimTeX : MACOs
-vim.g.vimtex_view_method = "skim"
-vim.g.vimtex_view_skim_activate = 1
-vim.g.vimtex_view_skim_sync = 1

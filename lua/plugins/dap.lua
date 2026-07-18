@@ -85,7 +85,7 @@ return {
         type = "probe-rs-debug",
         request = "launch",
         cwd = "${workspaceFolder}",
-        chip = "STM32F446RC", -- Double check this is your exact chip!
+        chip = "STM32FH755ZITx", -- Double check this is your exact chip!
         flashingConfig = {
           flashingEnabled = true,
           resetAfterFlashing = true,
@@ -106,14 +106,17 @@ return {
       if LazyVim and LazyVim.config and LazyVim.config.icons and LazyVim.config.icons.dap then
         for name, sign in pairs(LazyVim.config.icons.dap) do
           sign = type(sign) == "table" and sign or { sign }
-          vim.fn.sign_define("Dap" .. name, { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] })
+          vim.fn.sign_define(
+            "Dap" .. name,
+            { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+          )
         end
       end
     end,
   },
 
   -- =====================================================================
-      -- SECTION D: Real-time Disassembly Viewer Plugin
+  -- SECTION D: Real-time Disassembly Viewer Plugin
   -- =====================================================================
   {
     "https://codeberg.org/Jorenar/nvim-dap-disasm",

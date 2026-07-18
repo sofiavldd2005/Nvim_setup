@@ -14,6 +14,7 @@ return {
                 return require("opencode").snacks_picker_send(...)
               end,
             },
+            -- configure picker window keymaps for OpenCode integration
             win = {
               input = {
                 keys = {
@@ -25,7 +26,7 @@ return {
         },
       },
       {
-        "folke/which-key.nvim",
+        "folke/which-key.nvim", -- registers <leader>a as OpenCode group label
         opts = {
           spec = {
             { "<leader>a", group = "OpenCode" },
@@ -34,9 +35,30 @@ return {
       },
     },
     keys = {
-      { "<leader>aa", function() require("opencode").ask("@this: ", { submit = true }) end, mode = { "n", "x" }, desc = "Ask OpenCode" },
-      { "<leader>ax", function() require("opencode").select() end, mode = { "n", "x" }, desc = "OpenCode actions" },
-      { "<leader>at", function() require("opencode").toggle() end, mode = { "n", "t" }, desc = "Toggle OpenCode" },
+      {
+        "<leader>aa",
+        function()
+          require("opencode").ask("@this: ", { submit = true })
+        end,
+        mode = { "n", "x" },
+        desc = "Ask OpenCode",
+      },
+      {
+        "<leader>ax",
+        function()
+          require("opencode").select()
+        end,
+        mode = { "n", "x" },
+        desc = "OpenCode actions",
+      },
+      {
+        "<leader>at",
+        function()
+          require("opencode").toggle()
+        end,
+        mode = { "n", "t" },
+        desc = "Toggle OpenCode",
+      },
     },
     config = function()
       vim.g.opencode_opts = {}
